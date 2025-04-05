@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Wardrobe - AI Stylist</title>
+    <style>
+        :root {
+            --teal: #20C997;
+            --gray: #E9ECEF;
+            --charcoal: #212529;
+        }
+
+        body { font-family: 'Inter', sans-serif; background: #F8F9FA; margin: 0; padding-bottom: 80px; }
+        .page { display: none; padding: 20px; }
+        .page.active { display: block; }
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; padding: 15px; display: flex; justify-content: space-around; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
+        .nav-btn { cursor: pointer; padding: 10px; }
+        .card { background: white; border-radius: 12px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .teal-btn { background-color: var(--teal); color: white; padding: 10px 20px; border-radius: 24px; border: none; cursor: pointer; }
+        .outfit-card { height: 250px; border-radius: 12px; background-size: cover; position: relative; }
+        .outfit-overlay { background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7)); color: white; padding: 15px; position: absolute; bottom: 0; width: 100%; }
+        .closet-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .clothing-item { aspect-ratio: 1; background-size: cover; border-radius: 8px; }
+        .chatbox { background: white; padding: 15px; border-radius: 12px; margin-top: 10px; }
+        .event-selector, .mood-selector { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div id="home" class="page active">
+        <div class="card">
+            <h2>🌤️ Weather: <span id="weather">22°C</span></h2>
+            <button class="teal-btn" onclick="refreshWeather()">Refresh</button>
+        </div>
+        <div class="card">
+            <h3>Select Event</h3>
+            <select class="event-selector" id="event">
+                <option value="casual">Casual Outing</option>
+                <option value="office">Office Meeting</option>
+                <option value="date">Date Night</option>
+                <option value="workout">Workout</option>
+            </select>
+        </div>
+        <div class="outfit-card" style="background-image: url('https://source.unsplash.com/random/600x400/?fashion')">
+            <div class="outfit-overlay">
+                <h3>Recommended Outfit</h3>
+                <button class="teal-btn" onclick="showPage('outfits')">View More →</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="closet" class="page">
+        <div class="closet-grid">
+            <div class="clothing-item" style="background-image: url('https://source.unsplash.com/random/300x300/?jacket')"></div>
+            <div class="clothing-item" style="background-image: url('https://source.unsplash.com/random/300x300/?shirt')"></div>
+        </div>
+    </div>
+
+    <div id="ai-stylist" class="page">
+        <div class="card chatbox">
+            <h3>AI Stylist</h3>
+            <input type="text" id="chatInput" placeholder="Ask for outfit suggestions...">
+            <button class="teal-btn" onclick="askAI()">Ask</button>
+            <p id="chatResponse"></p>
+        </div>
+    </div>
+
+    <div id="calendar" class="page">
+        <div class="card">
+            <h3>Plan Your Outfits</h3>
+            <p>Coming Soon...</p>
+        </div>
+    </div>
+
+    <div id="upload" class="page">
+        <div class="card">
+            <h3>Add to Closet</h3>
+            <input type="file" id="imageUpload">
+            <button class="teal-btn">Upload</button>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <div class="nav-btn" data-page="home">🏠</div>
+        <div class="nav-btn" data-page="closet">👔</div>
+        <div class="nav-btn" data-page="ai-stylist">🤖</div>
+        <div class="nav-btn" data-page="calendar">📅</div>
+        <div class="nav-btn" data-page="upload">➕</div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => showPage(btn.dataset.page));
+        });
+        function refreshWeather() {
+            const temp = Math.floor(Math.random() * 15) + 15;
+            document.getElementById('weather').innerText = `${temp}°C`;
+        }
+        function askAI() {
+            let input = document.getElementById('chatInput').value;
+            let response = "Try a casual outfit with a light jacket!";
+            if (input.toLowerCase().includes("rain")) response = "Go for a waterproof jacket!";
+            document.getElementById('chatResponse').innerText = response;
+        }
+    </script>
+</body>
+</html>
