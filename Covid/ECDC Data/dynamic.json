@@ -1,0 +1,19 @@
+[
+    {
+        "relativeURL": "Harsha2001-creater/AzureProject/refs/heads/main/Covid/ECDC%20Data/hospital_admissions.csv",
+        "fileNAME": "hospital_admissions.csv"
+    },
+    {
+        "relativeURL": "Harsha2001-creater/AzureProject/refs/heads/main/Covid/ECDC%20Data/country_response.csv",
+        "fileNAME": "country_response.csv"
+    },
+    {
+        "relativeURL": "Harsha2001-creater/AzureProject/refs/heads/main/Covid/ECDC%20Data/cases_deaths.csv",
+        "fileNAME": "cases_deaths.csv"
+    },
+    {
+        "relativeURL": "Harsha2001-creater/AzureProject/refs/heads/main/Covid/ECDC%20Data/testing.csv",
+        "fileNAME": "testing.csv"
+    }
+]
+
